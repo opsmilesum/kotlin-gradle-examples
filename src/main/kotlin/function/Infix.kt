@@ -12,7 +12,7 @@ class Student() {
 
 fun main() {
     val student = Student()
-    
+
     student printId 12306
     student printId 10086
 
