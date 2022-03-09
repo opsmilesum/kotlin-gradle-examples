@@ -1,0 +1,6 @@
+rootProject.name = "Kotlin-Gradle-examples"
+include("subapp")
+
+gradle.projectsEvaluated {
+    println("\nAll projects evaluated...")
+}

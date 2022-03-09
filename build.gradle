@@ -1,0 +1,67 @@
+import org.unbrokendome.gradle.plugins.helm.command.tasks.*
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.5.0'
+    id 'org.jetbrains.kotlin.jvm' version '1.6.0'
+    id 'org.unbroken-dome.helm' version '1.7.0'
+    id 'org.unbroken-dome.helm-releases' version '1.7.0'
+    id 'org.unbroken-dome.helm-publish' version '1.7.0'
+    // id 'org.unbroken-dome.helm-commands' version '1.7.0'
+}
+
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+   mavenCentral()
+}
+
+dependencies {
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib'
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.4'
+}
+
+subprojects { sub ->
+    {
+        sub.beforeEvaluate {
+            proj -> {
+                println 'BeforeEvaluate: This is the sub project: ' + proj.name
+            }
+        }
+    }
+}
+
+println 'Root Project Configure begins...'
+
+task hello {
+    println 'Hello, this is my first Gradle Project.'
+}
+
+println 'Root Project Configure over...'
+
+gradle.projectsEvaluated {
+    println '\nAll projects evaluated...'
+}
+
+helm {
+    charts {
+        main {
+            dependencies {
+                add project: ':subapp', chart: 'mychart'
+            }
+            lint {
+                configurations {
+                    local {
+                        valueFiles.from 'src/main/helm/values-local.yaml'
+                    }
+                    dev {
+                        valueFiles.from 'src/main/helm/values-dev.yaml'
+                    }
+                }
+            }
+        }
+    }
+}
