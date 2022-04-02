@@ -20,8 +20,10 @@ repositories {
 
 dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib'
-    testImplementation 'junit:junit:4.12'
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.4'
+    implementation 'org.slf4j:slf4j-api:1.7.32'
+    testImplementation "io.mockk:mockk:1.10.0"
+    testImplementation 'junit:junit:4.12'
 }
 
 subprojects { sub ->
@@ -46,22 +48,22 @@ gradle.projectsEvaluated {
     println '\nAll projects evaluated...'
 }
 
-helm {
-    charts {
-        main {
-            dependencies {
-                add project: ':subapp', chart: 'mychart'
-            }
-            lint {
-                configurations {
-                    local {
-                        valueFiles.from 'src/main/helm/values-local.yaml'
-                    }
-                    dev {
-                        valueFiles.from 'src/main/helm/values-dev.yaml'
-                    }
-                }
-            }
-        }
-    }
-}
+//helm {
+//    charts {
+//        main {
+//            dependencies {
+//                add project: ':subapp', chart: 'mychart'
+//            }
+//            lint {
+//                configurations {
+//                    local {
+//                        valueFiles.from 'src/main/helm/values-local.yaml'
+//                    }
+//                    dev {
+//                        valueFiles.from 'src/main/helm/values-dev.yaml'
+//                    }
+//                }
+//            }
+//        }
+//    }
+// }

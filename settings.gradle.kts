@@ -1,2 +1,2 @@
 rootProject.name = "Kotlin-Gradle-examples"
-include(":subapp")
+//include(":subapp")
