@@ -33,6 +33,9 @@ suspend fun doWorld() = coroutineScope {  // this: CoroutineScope
 }
 ```
 
+## GlobalsScope
+A global CoroutineScope not bound to any job. Global scope is used to launch top-level coroutines which are operating on the whole application lifetime and are not cancelled prematurely.
+So if it hangs or gets delayed due to a problem (e.g. due to a slow network), it will stay working and consuming resources.
 ## Job
 ```kotlin
 val job = launch { // launch a new coroutine and keep a reference to its Job
