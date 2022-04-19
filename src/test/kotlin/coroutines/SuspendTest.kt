@@ -1,8 +1,7 @@
 package coroutines
 
-import kotlinx.coroutines.async
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
+import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.*
 import org.junit.jupiter.api.Test
 import kotlin.system.measureTimeMillis
 
@@ -40,5 +39,19 @@ class SuspendTest {
             println("Result:${a.await() + b.await()}")
         }
         println("Time consumption: $time")
+    }
+
+
+    suspend fun get(): Boolean {
+        delay(100)
+        return true
+    }
+
+    @Test
+    suspend fun test3()  {
+        val result = CoroutineScope(Dispatchers.Default).async {
+             get()
+        }.await()
+        result shouldBe true
     }
 }

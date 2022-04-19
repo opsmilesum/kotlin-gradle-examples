@@ -23,6 +23,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
     testImplementation("io.kotest:kotest-assertions-core:5.2.0")
     testImplementation("io.kotest:kotest-runner-junit5:5.2.0")
+    testImplementation("org.jetbrains.kotlin:kotlin-reflect:1.6.10")
 }
 
 task("hello") {
